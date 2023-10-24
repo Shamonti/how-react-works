@@ -21,22 +21,28 @@ const content = [
 export default function App() {
   return (
     <div>
-      <Tabbed></Tabbed>
+      <Tabbed content={content}></Tabbed>
     </div>
   );
 }
 
-function Tabbed() {
+function Tabbed({ content }) {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
     <div>
-      <Tab num={0} activeTab={activeTab} setActiveTab={setActiveTab}></Tab>
-      <Tab num={1} activeTab={activeTab} setActiveTab={setActiveTab}></Tab>
-      <Tab num={2} activeTab={activeTab} setActiveTab={setActiveTab}></Tab>
-      <Tab num={3} activeTab={activeTab} setActiveTab={setActiveTab}></Tab>
-      <TabContent item={content.at(activeTab)}></TabContent>
-      <DifferentContent></DifferentContent>
+      <div className='tabs'>
+        <Tab num={0} activeTab={activeTab} setActiveTab={setActiveTab}></Tab>
+        <Tab num={1} activeTab={activeTab} setActiveTab={setActiveTab}></Tab>
+        <Tab num={2} activeTab={activeTab} setActiveTab={setActiveTab}></Tab>
+        <Tab num={3} activeTab={activeTab} setActiveTab={setActiveTab}></Tab>
+      </div>
+
+      {activeTab <= 2 ? (
+        <TabContent item={content.at(activeTab)}></TabContent>
+      ) : (
+        <DifferentContent></DifferentContent>
+      )}
     </div>
   );
 }
@@ -82,5 +88,9 @@ function TabContent({ item }) {
 }
 
 function DifferentContent() {
-  return <div>different content</div>;
+  return (
+    <div className='tab-content'>
+      <h4>I'm a DIFFERENT tab, so I reset state 💣💥</h4>
+    </div>
+  );
 }
