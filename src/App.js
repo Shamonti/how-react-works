@@ -65,8 +65,13 @@ function TabContent({ item }) {
   const [isExpanded, setIsExpanded] = useState(true);
   const [likes, setLikes] = useState(0);
 
-  function handleOnClick() {
+  function handleInc() {
     setLikes(likes + 1);
+  }
+
+  function handleUndo() {
+    setIsExpanded(true);
+    setLikes(0);
   }
 
   return (
@@ -78,12 +83,13 @@ function TabContent({ item }) {
           {isExpanded ? 'Hide' : 'Show'} Details
         </button>
         <div className='hearts-counter'>
-          {likes} ❤<button onClick={handleOnClick}>+</button>
+          <span>{likes} ❤</span>
+          <button onClick={handleInc}>+</button>
           <button>+++</button>
         </div>
       </div>
       <div className='tab-undo'>
-        <button>Undo</button>
+        <button onClick={handleUndo}>Undo</button>
         <button>Undo in 2s</button>
       </div>
     </div>
